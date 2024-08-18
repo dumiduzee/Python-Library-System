@@ -1,5 +1,5 @@
 from connection import Con
-
+from tabulate import tabulate
 
 class Actions:
     def __init__(self):
@@ -35,5 +35,17 @@ class Actions:
 
         except Exception as e:
             return f"Something went wrong while removing book ISBN - {e}"
+
+
+    def ShowAllBooks(self):
+        querry = 'SELECT * FROM library'
+        cursor = self.__con.getCursor()
+        cursor.execute(querry)
+        result = cursor.fetchall()
+        if result:
+            headers = ["ID","NAME","ISBN","AUTHOR"]
+            return tabulate(result,headers,tablefmt="grid")
+        else:
+            return "No result found!!"
 
 

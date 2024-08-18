@@ -30,6 +30,7 @@ class LibraryMenu:
                 case "C":
                     pass
                 case "D":
+                    print(self.__activity.ShowAllBooks())
                     pass
                 case "X":
                     print("✨Programmed exited!!✨")
