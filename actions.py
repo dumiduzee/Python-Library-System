@@ -48,4 +48,20 @@ class Actions:
         else:
             return "No result found!!"
 
+    def updateBook(self,bookIsbn):
+        if bookIsbn:
+            bookName = input("Enter book name : ")
+            autho = input(f"Enter author of book {bookIsbn} : ")
+            try:
+                if (bookName and autho):
+                    querry = f'UPDATE library SET name="{bookName}" , author="{autho}" WHERE isbn="{bookIsbn}"'
+                    print(querry)
+                    cursor = self.__con.getCursor()
+                    cursor.execute(querry)
+                    return f"{bookName} Updated successfully!!"
+                else:
+                    return "Fields cant be empty!!"
+            except Exception as e:
+                return f"Something went wrong while adding book!! {e}"
+
 

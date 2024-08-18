@@ -28,6 +28,8 @@ class LibraryMenu:
                     bookIsbn = input("Enter isbn number : ")
                     print(self.__activity.removeBook(bookIsbn))
                 case "C":
+                    bookIsbn = input("Enter isbn number : ")
+                    print(self.__activity.updateBook(bookIsbn))
                     pass
                 case "D":
                     print(self.__activity.ShowAllBooks())
