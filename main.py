@@ -1,7 +1,7 @@
 from connection import Con
 from adminValidation import AdminValidation
 from libraryMenu import LibraryMenu
-connection = Con("localhost","root","4878","logger")
+connection = Con("localhost","root","4878","librarydb")
 print(connection.getDatabase())
 
 
@@ -12,7 +12,7 @@ while True:
     adminPassword = input("Enter password : ").lower()
     try:
         if adminPassword and adminPassword:
-            validation = AdminValidation(adminUsername,adminPassword)
+            validation = AdminValidation(adminUsername,adminPassword,connection)
             if validation.userAndPasswordValidator():
                 LibraryMenu().Librarymenu()
                 break
