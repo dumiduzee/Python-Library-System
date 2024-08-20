@@ -1,5 +1,6 @@
 from connection import Con
 from tabulate import tabulate
+import pandas as pd
 
 class Actions:
     def __init__(self):
@@ -36,15 +37,27 @@ class Actions:
         except Exception as e:
             return f"Something went wrong while removing book ISBN - {e}"
 
-
     def ShowAllBooks(self):
-        querry = 'SELECT * FROM library'
+        # Query to get all books from the library
+        query = 'SELECT * FROM library'
+
+        # Get cursor and execute the query
         cursor = self.__con.getCursor()
-        cursor.execute(querry)
+        cursor.execute(query)
         result = cursor.fetchall()
+
         if result:
-            headers = ["ID","NAME","ISBN","AUTHOR"]
-            return tabulate(result,headers,tablefmt="grid")
+            # Define headers for the DataFrame
+            headers = ["ID", "NAME", "ISBN", "AUTHOR"]
+
+            # Convert result to DataFrame
+            df = pd.DataFrame(result, columns=headers)
+
+            # Save DataFrame to Excel file
+            excel_filename = 'library_books.xlsx'
+            df.to_excel(excel_filename, index=False, engine='openpyxl')
+
+            return f"Data has been successfully saved to {excel_filename}"
         else:
             return "No result found!!"
 
